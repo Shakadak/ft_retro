@@ -27,8 +27,10 @@ class Unit
  	char** up(char **tab);
  	char** down(char **tab);
  	void attack(void);
+ 	void rLife(char **tab);
  	char** rAttack(char **tab);
-
+ 	
+ 	int death(void)const;
  	int getX(void)const;
  	int getY(void)const;
  	char getC(void)const;
@@ -36,6 +38,7 @@ class Unit
  	int _x;
  	int _y;
  	int **_att;
+ 	int _death;
  	static int _attmax;
  	static int _xmin;
  	static int _ymin;

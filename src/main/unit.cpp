@@ -25,6 +25,7 @@ Unit::Unit(int x, int y, char c) : _x(x), _y(y), _type(c)
 	for (int i=0; i < this->_attmax; i++)
     	for (int j=0; j < 3; j++)
       		this->_att[i][j] = 0;
+    this->_death = 0;
 }
 
 Unit::Unit(Unit const & str)
@@ -45,6 +46,11 @@ Unit & Unit::operator=(Unit const & rhs)
 	this->_y = rhs.getY();
 	this->_type = rhs.getC();
 	return (*this);
+}
+
+int Unit::death(void) const
+{
+	return (this->_death);
 }
 
 char Unit::getC(void) const
@@ -68,7 +74,10 @@ char** Unit::right(char **tab)
 	{
 		tab[this->_y][this->_x] = ' ';
 		this->_y++;
-		tab[this->_y][this->_x] = this->_type;
+		if (tab[this->_y][this->_x] == ' ')
+			tab[this->_y][this->_x] = this->_type;
+		else
+			this->_death = 1;
 	}
 	return tab;
 }
@@ -79,7 +88,10 @@ char** Unit::left(char **tab)
 	{
 		tab[this->_y][this->_x] = ' ';
 		this->_y--;
-		tab[this->_y][this->_x] = this->_type;
+		if (tab[this->_y][this->_x] == ' ')
+			tab[this->_y][this->_x] = this->_type;
+		else
+			this->_death = 1;
 	}
 	return tab;
 }
@@ -90,7 +102,10 @@ char **Unit::up(char **tab)
 	{
 		tab[this->_y][this->_x] = ' ';
 		this->_x--;
-		tab[this->_y][this->_x] = this->_type;
+		if (tab[this->_y][this->_x] == ' ')
+			tab[this->_y][this->_x] = this->_type;
+		else
+			this->_death = 1;
 	}
 	return tab;
 }
@@ -101,7 +116,10 @@ char **Unit::down(char **tab)
 	{
 		tab[this->_y][this->_x] = ' ';
 		this->_x++;
-		tab[this->_y][this->_x] = this->_type;
+		if (tab[this->_y][this->_x] == ' ')
+			tab[this->_y][this->_x] = this->_type;
+		else
+			this->_death = 1;
 	}
 	return tab;
 }
@@ -136,6 +154,25 @@ char** Unit::rAttack(char **tab)
 		i++;
 	}
 	return tab;
+}
+void Unit::rLife(char **tab)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while(i != this->_ymax)
+	{
+		j = 0;
+		while(j != this->_xmax)
+		{
+			if (tab[i][j] == '>')
+				return;
+			j++;
+		}
+		i++;
+	}
+	this->_death = 1;
 }
 
 int Unit::_xmax = 20;
