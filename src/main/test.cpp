@@ -16,41 +16,36 @@ void erase (int y, int x) {
 void game_loop(char main_char, int row, int col, int ch) {
     // Check if the user wishes to play the game
     if(ch == 'q' || ch =='Q') return;
+    nodelay(stdscr, TRUE);
 
+    bool state = false;
     // Show the main character on the screen
     mvaddch(row, col, main_char);
     refresh();
 
     for(;;) {
         ch = getch();
+        erase(row, col);
 
         if(ch == KEY_LEFT) {
-            erase(row, col);
             col = col - 1;
-            mvaddch(row, col, main_char);
-            refresh();
         }
         else if(ch == KEY_RIGHT) {
-            erase(row, col);
             col = col + 1;
-            mvaddch(row, col, main_char);
-            refresh();
         }
         else if(ch == KEY_UP) {
-            erase(row, col);
             row = row - 1;
-            mvaddch(row, col, main_char);
-            refresh();
         }
         else if(ch == KEY_DOWN) {
-            erase(row, col);
             row = row + 1;
-            mvaddch(row, col, main_char);
-            refresh();
         }
         else if(ch == 'q' || ch == 'Q') {
             break;
         }
+        mvaddch(row, col, main_char);
+        refresh();
+        main_char = (state ? '<' : '>');
+        state = !state;
     }
 }
 
