@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 15:16:53 by npineau           #+#    #+#             */
-/*   Updated: 2015/11/07 17:53:19 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/07 18:02:30 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ State::State(void) : _xmax(0), _ymax(0) {
 }
 
 State::State(State const& src)  : _xmax(src._xmax), _ymax(src._ymax) {
-    char **tab = new char*[_xmax];
-    for (unsigned int i=0; i < _xmax; i++)
-        tab[i] = new char[_ymax];
+    char **tab = new char*[_ymax];
+    for (unsigned int i=0; i < _ymax; i++)
+        tab[i] = new char[_xmax];
 
     for( unsigned int i = 0; i < _ymax; i++) {
         for (unsigned int j = 0; j < _xmax; j++) {
@@ -83,15 +83,15 @@ State::State(State const& src)  : _xmax(src._xmax), _ymax(src._ymax) {
 }
 
 State::State(unsigned int x, unsigned int y) : _xmax(x), _ymax(y) {
-    char **tab = new char*[_xmax];
-    for (unsigned int i=0; i < _xmax; i++)
-        tab[i] = new char[_ymax];
+    char **tab = new char*[_ymax];
+    for (unsigned int i=0; i < _ymax; i++)
+        tab[i] = new char[_xmax];
 
     clearGrid();
 }
 
 State::~State(void) {
-    for(unsigned int i = 0; i < _xmax; i++) {
+    for(unsigned int i = 0; i < _ymax; i++) {
         delete [] _grid[i];
     }
     delete [] _grid;
