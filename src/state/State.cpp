@@ -6,28 +6,82 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 15:16:53 by npineau           #+#    #+#             */
-/*   Updated: 2015/11/07 15:33:50 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/07 17:19:56 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cstdlib>
+#include <ncurses.h>
 #include "State.hpp"
+#include "Unit.hpp"
 
-State::State(void) {} /*_xmax(10), _ymax(10) {
-    _tab = new char*[_xmax];
-    for (int i=0; i < _xmax; i++)
-        tab[i] = new char[_ymax];
+/*void State::display(Unit const& unit) {
 }*/
 
-State::State(State const&) {
+void State::input(Unit& player) {
+    int ch = getch();
+    switch(ch) {
+        case 'q':
+        case 'Q':
+            endwin();
+            std::exit(EXIT_SUCCESS);
+            break;
+        case KEY_LEFT:
+            player.left(_grid);
+            break;
+        case KEY_RIGHT:
+            player.left(_grid);
+            break;
+        case KEY_UP:
+            player.left(_grid);
+            break;
+        case KEY_DOWN:
+            player.left(_grid);
+            break;
+    }
+}
+
+void State::render(void) {
+    for( unsigned int i = 0; i < _ymax; i++) {
+        for (unsigned int j = 0; j < _xmax; j++) {
+            mvaddch(j, i, _grid[i][j]);
+        }
+    }
+    refresh();
+}
+
+char**  State::getGrid(void) {
+    return (this->_grid);
+}
+
+
+State::State(void) : _xmax(0), _ymax(0) {
+}
+
+State::State(State const& src)  : _xmax(src._xmax), _ymax(src._ymax) {
+    char **tab = new char*[_xmax];
+    for (unsigned int i=0; i < _xmax; i++)
+        tab[i] = new char[_ymax];
+
+    for( unsigned int i = 0; i < _ymax; i++) {
+        for (unsigned int j = 0; j < _xmax; j++) {
+            _grid[i][j] = src._grid[i][j];
+        }
+    }
 }
 
 State::State(unsigned int x, unsigned int y) : _xmax(x), _ymax(y) {
-    char **tab = new char*[x];
-    for (unsigned int i=0; i < x; i++)
-        tab[i] = new char[y];
+    char **tab = new char*[_xmax];
+    for (unsigned int i=0; i < _xmax; i++)
+        tab[i] = new char[_ymax];
 }
 
-State::~State(void) {}
+State::~State(void) {
+    for(unsigned int i = 0; i < _xmax; i++) {
+        delete [] _grid[i];
+    }
+    delete [] _grid;
+}
 
 State&  State::operator=(State const& rhs) {
     _xmax = rhs._xmax;
