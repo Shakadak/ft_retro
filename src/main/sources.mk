@@ -1,4 +1,4 @@
-MAIN := test.cpp
+MAIN := main.cpp unit.cpp
 
 OBJ := $(OBJ) $(MAIN:.cpp=.o)
 
