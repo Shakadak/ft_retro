@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 15:16:53 by npineau           #+#    #+#             */
-/*   Updated: 2015/11/07 17:19:56 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/07 17:53:19 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ void State::input(Unit& player) {
         case KEY_DOWN:
             player.left(_grid);
             break;
+        case ' ':
+            player.attack();
     }
+    player.rAttack(_grid);
 }
 
 void State::render(void) {
@@ -54,6 +57,15 @@ char**  State::getGrid(void) {
     return (this->_grid);
 }
 
+
+char**  State::clearGrid(void) {
+    for( unsigned int i = 0; i < _ymax; i++) {
+        for (unsigned int j = 0; j < _xmax; j++) {
+            _grid[i][j] = 'x';
+        }
+    }
+    return _grid;
+}
 
 State::State(void) : _xmax(0), _ymax(0) {
 }
@@ -74,6 +86,8 @@ State::State(unsigned int x, unsigned int y) : _xmax(x), _ymax(y) {
     char **tab = new char*[_xmax];
     for (unsigned int i=0; i < _xmax; i++)
         tab[i] = new char[_ymax];
+
+    clearGrid();
 }
 
 State::~State(void) {

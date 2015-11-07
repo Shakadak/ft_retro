@@ -14,6 +14,7 @@ class State {
         void    input(Unit& player);
         void    render(void);
         char**  getGrid(void);
+        char**  clearGrid(void);
 
     private:
         char**  _grid;
