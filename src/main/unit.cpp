@@ -19,7 +19,12 @@ Unit::Unit()
 
 Unit::Unit(int x, int y, char c) : _x(x), _y(y), _type(c)
 {
-
+	this->_att = new int*[this->_attmax];
+	for (int i = 0; i < this->_attmax; i++)
+		this->_att[i] = new int[3];
+	for (int i=0; i < this->_attmax; i++)
+    	for (int j=0; j < 3; j++)
+      		this->_att[i][j] = 0;
 }
 
 Unit::Unit(Unit const & str)
@@ -29,7 +34,9 @@ Unit::Unit(Unit const & str)
 
 Unit::~Unit()
 {
-
+	for (int i=0; i < this->_attmax; i++)
+    	delete[] this->_att[i];
+  	delete[] this->_att;
 }
 
 Unit & Unit::operator=(Unit const & rhs)
@@ -57,32 +64,82 @@ int Unit::getY(void) const
 
 char** Unit::right(char **tab)
 {
-	tab[this->_y][this->_x] = ' ';
-	this->_y++;
-	tab[this->_y][this->_x] = this->_type;
+	if (this->_y < this->_ymax - 1)
+	{
+		tab[this->_y][this->_x] = ' ';
+		this->_y++;
+		tab[this->_y][this->_x] = this->_type;
+	}
 	return tab;
 }
 
 char** Unit::left(char **tab)
 {
-	tab[this->_y][this->_x] = ' ';
-	this->_y--;
-	tab[this->_y][this->_x] = this->_type;
+	if (this->_y > this->_ymin)
+	{
+		tab[this->_y][this->_x] = ' ';
+		this->_y--;
+		tab[this->_y][this->_x] = this->_type;
+	}
 	return tab;
 }
 
 char **Unit::up(char **tab)
 {
-	tab[this->_y][this->_x] = ' ';
-	this->_x--;
-	tab[this->_y][this->_x] = this->_type;
+	if (this->_x > this->_xmin)
+	{
+		tab[this->_y][this->_x] = ' ';
+		this->_x--;
+		tab[this->_y][this->_x] = this->_type;
+	}
 	return tab;
 }
 
 char **Unit::down(char **tab)
 {
-	tab[this->_y][this->_x] = ' ';
-	this->_x++;
-	tab[this->_y][this->_x] = this->_type;
+	if (this->_x < this->_xmax - 1)
+	{
+		tab[this->_y][this->_x] = ' ';
+		this->_x++;
+		tab[this->_y][this->_x] = this->_type;
+	}
 	return tab;
 }
+
+void Unit::attack(void)
+{
+	int i = 0;
+	while (this->_att[i][0] != 0 && i < this->_attmax - 1)
+		i++;
+	if (i < this->_attmax - 1)
+	{
+		this->_att[i][0] = 1;
+		this->_att[i][1] = this->_x;
+		this->_att[i][2] = this->_y + 1;
+	}
+}
+
+char** Unit::rAttack(char **tab)
+{
+	int i = 0;
+	while (i < this->_attmax)
+	{
+		if (this->_att[i][0] == 1)
+		{
+			tab[this->_att[i][2]][this->_att[i][1]] = ' ';
+			this->_att[i][2]++;
+			if (this->_att[i][2] < this->_ymax)
+				tab[this->_att[i][2]][this->_att[i][1]] = '-';
+			else
+				this->_att[i][0] = 0;
+		}
+		i++;
+	}
+	return tab;
+}
+
+int Unit::_xmax = 20;
+int Unit::_xmin = 0;
+int Unit::_ymax = 100;
+int Unit::_ymin = 0;
+int Unit::_attmax = 5;

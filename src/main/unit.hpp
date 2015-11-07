@@ -26,6 +26,8 @@ class Unit
  	char** left(char **tab);
  	char** up(char **tab);
  	char** down(char **tab);
+ 	void attack(void);
+ 	char** rAttack(char **tab);
 
  	int getX(void)const;
  	int getY(void)const;
@@ -33,6 +35,12 @@ class Unit
  protected:
  	int _x;
  	int _y;
+ 	int **_att;
+ 	static int _attmax;
+ 	static int _xmin;
+ 	static int _ymin;
+ 	static int _xmax;
+ 	static int _ymax;
  	char _type;
  };
 

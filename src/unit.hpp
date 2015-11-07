@@ -33,6 +33,10 @@ class Unit
  protected:
  	int _x;
  	int _y;
+ 	static int _xmin = 0;
+ 	static int _ymin = 0;
+ 	static int _xmax = 30;
+ 	static int _ymax = 100;
  	char _type;
  };
 

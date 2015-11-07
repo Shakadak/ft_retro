@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <ncurses.h>
+#include <iostream>
 #include "unit.hpp"
 
 void init(void) {
@@ -19,7 +20,8 @@ void init(void) {
     noecho();
     cbreak();
     keypad(stdscr, TRUE);
-    nodelay(stdscr, TRUE);
+    //nodelay(stdscr, TRUE);
+    halfdelay(1);
     curs_set(0);
 }
 
@@ -34,7 +36,7 @@ char **init_tab(char **tab, int x, int y)
 		j = 0;
 		while(j != x)
 		{
-			tab[i][j] = ' ';
+			tab[i][j] = 'x';
 			j++;
 		}
 		i++;
@@ -84,11 +86,16 @@ void game_loop(char **tab, int x, int y)
 		{
 			tab = j.down(tab);
 		}
+		else if (ch == 32)
+		{
+			j.attack();
+		}
 		else if(ch == 'q' || ch == 'Q') {
             break;
         }
-			display(tab, x, y);
-			refresh();
+        tab = j.rAttack(tab);
+		display(tab, x, y);
+		refresh();
     }
 }
 
@@ -97,16 +104,18 @@ int main(void)
 	int x;
 	int y;
 
-	x = 100;
+	x = 20;
 	y = 100;
-	char **tab = new char*[x];
-	for (int i=0; i < x; i++)
-		tab[i] = new char[y];
+	char **tab = new char*[y];
+	for (int i=0; i < y; i++)
+		tab[i] = new char[x];
 	init();
 	init_tab(tab, x, y);
 	game_loop(tab, x, y);
 	endwin();
-	delete tab;
+	for (int i=0; i < y; i++)
+    	delete[] tab[i];
+  	delete[] tab;
 	return 0;
 }
 
