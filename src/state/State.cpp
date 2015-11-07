@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 15:16:53 by npineau           #+#    #+#             */
-/*   Updated: 2015/11/07 18:27:33 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/07 21:14:45 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,13 @@
 }*/
 
 void State::input(Unit& player) {
-    int ch = getch();
+    int ch;
+    int buff = getch();
+    do {
+        ch = buff;
+        buff = getch();
+    } while (buff != ERR);
+
     switch(ch) {
         case 'q':
         case 'Q':

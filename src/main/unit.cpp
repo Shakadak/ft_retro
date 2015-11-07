@@ -6,13 +6,30 @@
 /*   By: dle-norm <dle-norm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 13:35:15 by dle-norm          #+#    #+#             */
-/*   Updated: 2015/11/07 19:36:03 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/07 21:07:17 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cstdlib>
 #include "unit.hpp"
 
+char getType(void) {
+    char types[9] = {'<', 'I', 'K', 'O', '0', '*', '$', '#', '@'};
+    return (types[rand() % 9]);
+}
+
 Unit::Unit()
+{
+	this->_att = new int*[this->_attmax];
+	for (int i = 0; i < this->_attmax; i++)
+		this->_att[i] = new int[3];
+	for (int i=0; i < this->_attmax; i++)
+    	for (int j=0; j < 3; j++)
+      		this->_att[i][j] = 0;
+    this->_death = 0;
+}
+
+Unit::Unit(int x, int y) : _x(x), _y(y), _type(getType())
 {
 	this->_att = new int*[this->_attmax];
 	for (int i = 0; i < this->_attmax; i++)

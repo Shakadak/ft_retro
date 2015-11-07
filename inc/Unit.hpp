@@ -6,7 +6,7 @@
 /*   By: dle-norm <dle-norm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 13:35:27 by dle-norm          #+#    #+#             */
-/*   Updated: 2015/11/07 13:35:39 by dle-norm         ###   ########.fr       */
+/*   Updated: 2015/11/07 20:21:22 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ class Unit
  public:
  	Unit();
  	Unit(int x, int y, char c);
+ 	Unit(int x, int y);
  	Unit( Unit const & str);
  	~Unit();
  	

@@ -6,12 +6,13 @@
 /*   By: dle-norm <dle-norm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 13:20:41 by dle-norm          #+#    #+#             */
-/*   Updated: 2015/11/07 19:35:52 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/07 21:11:11 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ncurses.h>
 #include <iostream>
+#include <sys/time.h>
 #include "unit.hpp"
 #include "State.hpp"
 
@@ -21,9 +22,15 @@ void init(void) {
     noecho();
     cbreak();
     keypad(stdscr, TRUE);
-    //nodelay(stdscr, TRUE);
-    halfdelay(1);
+    nodelay(stdscr, TRUE);
+    //halfdelay(1);
     curs_set(0);
+}
+
+long long getTime() {
+    timeval tv;
+    gettimeofday(&tv, NULL);
+    return ((long long)tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
 void game_loop(void)
@@ -34,17 +41,27 @@ void game_loop(void)
     int i = 0;
     int k;
     int nbA;
+    long long interval = 100;
+    long long t0, t1;
 
+    t0 = getTime();
     while (i < 10)
     {
         nbA = rand() % 29;
-        e[i] = Unit(nbA, 99, '<');
+        e[i] = Unit(nbA, 99);
         i++;
     }
 
     j.left(game.getGrid());
     while (42)
     {
+        t1 = getTime();
+        if ( t1 < t0 + interval) {
+            continue;
+        }
+        else {
+            t0 = t1;
+        }
         game.input(j);
 
         i = 0;
@@ -53,7 +70,7 @@ void game_loop(void)
             if (e[i].death() == 1)
             {
                 nbA = rand() % 29;
-                e[i] = Unit(nbA, 99, '<');
+                e[i] = Unit(nbA, 99);
             }
             k = rand() % 50;
             if (k == 2)
