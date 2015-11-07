@@ -36,11 +36,12 @@ char **init_tab(char **tab, int x, int y)
 		j = 0;
 		while(j != x)
 		{
-			tab[i][j] = 'x';
+			tab[i][j] = ' ';
 			j++;
 		}
 		i++;
 	}
+	tab[20][12] = 'p';
 	return tab;
 }
 
@@ -67,6 +68,7 @@ void game_loop(char **tab, int x, int y)
 	int ch;
 	Unit j(10, 10, '>');
 
+	tab = j.left(tab);
 	while (42)
 	{
 		ch = getch();
@@ -94,6 +96,9 @@ void game_loop(char **tab, int x, int y)
             break;
         }
         tab = j.rAttack(tab);
+        j.rLife(tab);
+        if (j.death() == 1)
+        	break;
 		display(tab, x, y);
 		refresh();
     }
