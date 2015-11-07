@@ -10,7 +10,7 @@ void init(void) {
 }
 
 void erase (int y, int x) {
-    mvaddch(y, x, '#');
+    mvaddch(y, x, ' ');
 }
 
 void game_loop(char main_char, int row, int col, int ch) {
