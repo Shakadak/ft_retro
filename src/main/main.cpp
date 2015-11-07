@@ -66,8 +66,20 @@ void display(char **tab, int x, int y)
 void game_loop(char **tab, int x, int y)
 {
 	int ch;
-	Unit j(10, 10, '>');
+	int i;
+	int nbA;
+	int k;
 
+	i = 0;
+	Unit j(10, 10, '>');
+	Unit *e = new Unit[10];
+
+	while (i < 10)
+	{
+		nbA = rand() % 29;
+		e[i] = Unit(nbA, 99, '<');
+		i++;
+	}
 	tab = j.left(tab);
 	while (42)
 	{
@@ -95,13 +107,36 @@ void game_loop(char **tab, int x, int y)
 		else if(ch == 'q' || ch == 'Q') {
             break;
         }
+        i = 0;
+        while (i < 10)
+        {
+        	if (e[i].death() == 1)
+        	{
+        		nbA = rand() % 29;
+				e[i] = Unit(nbA, 99, '<');
+        	}
+        	k = rand() % 5;
+			if (k == 2)
+			{
+				e[i].eAttack();
+			}
+	     	e[i].left(tab);
+ 	      	i++;
+        }
         tab = j.rAttack(tab);
+        i = 0;
+        while (i < 10)
+        {
+        	tab = e[i].rEnnemy(tab);
+        	i++;
+        }
         j.rLife(tab);
         if (j.death() == 1)
         	break;
 		display(tab, x, y);
 		refresh();
     }
+    delete [] e;
 }
 
 int main(void)
@@ -109,6 +144,7 @@ int main(void)
 	int x;
 	int y;
 
+	srand(time(0));
 	x = 20;
 	y = 100;
 	char **tab = new char*[y];

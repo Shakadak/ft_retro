@@ -14,7 +14,13 @@
 
 Unit::Unit()
 {
-
+	this->_att = new int*[this->_attmax];
+	for (int i = 0; i < this->_attmax; i++)
+		this->_att[i] = new int[3];
+	for (int i=0; i < this->_attmax; i++)
+    	for (int j=0; j < 3; j++)
+      		this->_att[i][j] = 0;
+    this->_death = 0;
 }
 
 Unit::Unit(int x, int y, char c) : _x(x), _y(y), _type(c)
@@ -35,9 +41,9 @@ Unit::Unit(Unit const & str)
 
 Unit::~Unit()
 {
-	for (int i=0; i < this->_attmax; i++)
-    	delete[] this->_att[i];
-  	delete[] this->_att;
+	// for (int i=0; i < this->_attmax; i++)
+ //    	delete[] this->_att[i];
+ //  	delete[] this->_att;
 }
 
 Unit & Unit::operator=(Unit const & rhs)
@@ -45,7 +51,14 @@ Unit & Unit::operator=(Unit const & rhs)
 	this->_x = rhs.getX();
 	this->_y = rhs.getY();
 	this->_type = rhs.getC();
+	this->_death = rhs.death();
+	this->_att = rhs.getAtt();
 	return (*this);
+}
+
+int** Unit::getAtt(void) const 
+{
+	return(this->_att);
 }
 
 int Unit::death(void) const
@@ -137,6 +150,19 @@ void Unit::attack(void)
 	}
 }
 
+void Unit::eAttack(void)
+{
+	int i = 0;
+	while (this->_att[i][0] != 0 && i < this->_attmax - 1)
+		i++;
+	if (i < this->_attmax - 1)
+	{
+		this->_att[i][0] = 1;
+		this->_att[i][1] = this->_x;
+		this->_att[i][2] = this->_y - 1;
+	}
+}
+
 char** Unit::rAttack(char **tab)
 {
 	int i = 0;
@@ -155,6 +181,31 @@ char** Unit::rAttack(char **tab)
 	}
 	return tab;
 }
+
+char** Unit::rEnnemy(char **tab)
+{
+	int i = 0;
+	if (this->_y <= 1)
+	{
+		tab[this->_y][this->_x] = ' ';
+		this->_death = 1;
+	}
+	while (i < this->_attmax)
+	{
+		if (this->_att[i][0] == 1)
+		{
+			tab[this->_att[i][2]][this->_att[i][1]] = ' ';
+			this->_att[i][2]-=2;
+			if (this->_att[i][2] > this->_ymin)
+				tab[this->_att[i][2]][this->_att[i][1]] = '-';
+			else
+				this->_att[i][0] = 0;
+		}
+		i++;
+	}
+	return tab;
+}
+
 void Unit::rLife(char **tab)
 {
 	int i;
