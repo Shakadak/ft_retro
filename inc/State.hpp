@@ -1,6 +1,8 @@
 #ifndef STATE_HPP
 # define STATE_HPP
 
+#include "Unit.hpp"
+
 class State {
     public:
         State(void);
@@ -9,6 +11,7 @@ class State {
         ~State(void);
         State&  operator=(State const& rhs);
 
+        void    input(Unit& player);
         void    render(void);
         char**  getGrid(void);
 

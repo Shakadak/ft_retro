@@ -6,15 +6,40 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 15:16:53 by npineau           #+#    #+#             */
-/*   Updated: 2015/11/07 16:52:23 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/07 17:19:56 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cstdlib>
 #include <ncurses.h>
 #include "State.hpp"
+#include "Unit.hpp"
 
 /*void State::display(Unit const& unit) {
 }*/
+
+void State::input(Unit& player) {
+    int ch = getch();
+    switch(ch) {
+        case 'q':
+        case 'Q':
+            endwin();
+            std::exit(EXIT_SUCCESS);
+            break;
+        case KEY_LEFT:
+            player.left(_grid);
+            break;
+        case KEY_RIGHT:
+            player.left(_grid);
+            break;
+        case KEY_UP:
+            player.left(_grid);
+            break;
+        case KEY_DOWN:
+            player.left(_grid);
+            break;
+    }
+}
 
 void State::render(void) {
     for( unsigned int i = 0; i < _ymax; i++) {
