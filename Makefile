@@ -7,20 +7,10 @@ DIROBJ	:=	obj
 DIRINC	:=	inc
 
 DIRMAIN		:=	$(DIRSRC)/main
-3DIRPARSER	:=	$(DIRSRC)/parser
-#DIRSHAPE	:=	$(DIRSRC)/shapes
-#DIRRAY		:=	$(DIRSRC)/ray
-#DIRUTIL		:=	$(DIRSRC)/util
 
 ### FILES ###
 
-#HEAD := $(DIRINC)/$(NAME).h
-
 include $(DIRMAIN)/sources.mk
-#include $(DIRPARSER)/sources.mk
-#include $(DIRSHAPE)/sources.mk
-#include $(DIRRAY)/sources.mk
-#include $(DIRUTIL)/sources.mk
 
 POBJ	:=	$(addprefix $(DIROBJ)/, $(OBJ))
 
@@ -43,7 +33,7 @@ LINK	= $(CC) -o $@ $^ $(L_FLAG)
 
 .PHONY: all clean fclean re
 
-all: $(PMLX) $(PFT) $(PUMLX) $(PMTX) $(NAME)
+all: $(NAME)
 
 $(POBJ): |$(DIROBJ)
 
