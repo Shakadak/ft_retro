@@ -12,7 +12,7 @@ DIRSTATE	:=	$(DIRSRC)/state
 ### FILES ###
 
 include $(DIRMAIN)/sources.mk
-# include $(DIRSTATE)/sources.mk
+include $(DIRSTATE)/sources.mk
 
 POBJ	:=	$(addprefix $(DIROBJ)/, $(OBJ))
 

@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 15:16:53 by npineau           #+#    #+#             */
-/*   Updated: 2015/11/07 18:02:30 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/07 18:27:33 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,19 @@ void State::input(Unit& player) {
             player.left(_grid);
             break;
         case KEY_RIGHT:
-            player.left(_grid);
+            player.right(_grid);
             break;
         case KEY_UP:
-            player.left(_grid);
+            player.up(_grid);
             break;
         case KEY_DOWN:
-            player.left(_grid);
+            player.down(_grid);
             break;
         case ' ':
             player.attack();
     }
     player.rAttack(_grid);
+    player.rLife(_grid);
 }
 
 void State::render(void) {
@@ -61,7 +62,7 @@ char**  State::getGrid(void) {
 char**  State::clearGrid(void) {
     for( unsigned int i = 0; i < _ymax; i++) {
         for (unsigned int j = 0; j < _xmax; j++) {
-            _grid[i][j] = 'x';
+            _grid[i][j] = ' ';
         }
     }
     return _grid;
@@ -83,9 +84,9 @@ State::State(State const& src)  : _xmax(src._xmax), _ymax(src._ymax) {
 }
 
 State::State(unsigned int x, unsigned int y) : _xmax(x), _ymax(y) {
-    char **tab = new char*[_ymax];
+    _grid = new char*[_ymax];
     for (unsigned int i=0; i < _ymax; i++)
-        tab[i] = new char[_xmax];
+        _grid[i] = new char[_xmax];
 
     clearGrid();
 }
