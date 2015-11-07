@@ -27,9 +27,12 @@ class Unit
  	char** up(char **tab);
  	char** down(char **tab);
  	void attack(void);
+ 	void eAttack(void);
  	void rLife(char **tab);
  	char** rAttack(char **tab);
+ 	char** rEnnemy(char **tab);
  	
+ 	int **getAtt(void)const;
  	int death(void)const;
  	int getX(void)const;
  	int getY(void)const;
