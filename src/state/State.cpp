@@ -6,17 +6,17 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 15:16:53 by npineau           #+#    #+#             */
-/*   Updated: 2015/11/07 15:33:50 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/07 15:36:50 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "State.hpp"
 
-State::State(void) {} /*_xmax(10), _ymax(10) {
+State::State(void) : _xmax(10), _ymax(10) {/*
     _tab = new char*[_xmax];
     for (int i=0; i < _xmax; i++)
-        tab[i] = new char[_ymax];
-}*/
+        tab[i] = new char[_ymax];*/
+}
 
 State::State(State const&) {
 }
