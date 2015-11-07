@@ -6,13 +6,14 @@
 /*   By: dle-norm <dle-norm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 13:20:41 by dle-norm          #+#    #+#             */
-/*   Updated: 2015/11/07 15:11:32 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/07 18:49:35 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ncurses.h>
 #include <iostream>
 #include "unit.hpp"
+#include "State.hpp"
 
 void init(void) {
     initscr();
@@ -25,102 +26,26 @@ void init(void) {
     curs_set(0);
 }
 
-char **init_tab(char **tab, int x, int y)
+void game_loop(void)
 {
-	int i;
-	int j;
+    State game(20, 100);
+    Unit j(10, 10, '>');
 
-	i = 0;
-	while(i != y)
-	{
-		j = 0;
-		while(j != x)
-		{
-			tab[i][j] = ' ';
-			j++;
-		}
-		i++;
-	}
-	tab[20][12] = 'p';
-	return tab;
-}
-
-void display(char **tab, int x, int y)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while(i != y)
-	{
-		j = 0;
-		while(j != x)
-		{
-			mvaddch(j, i, tab[i][j]);
-			j++;
-		}
-		i++;
-	}
-}
-
-void game_loop(char **tab, int x, int y)
-{
-	int ch;
-	Unit j(10, 10, '>');
-
-	tab = j.left(tab);
-	while (42)
-	{
-		ch = getch();
-		if (ch == KEY_LEFT)
-		{
-			tab = j.left(tab);
-		}
-		else if (ch == KEY_RIGHT)
-		{
-			tab = j.right(tab);
-		}
-		else if (ch == KEY_UP)
-		{
-			tab = j.up(tab);
-		}
-		else if (ch == KEY_DOWN)
-		{
-			tab = j.down(tab);
-		}
-		else if (ch == 32)
-		{
-			j.attack();
-		}
-		else if(ch == 'q' || ch == 'Q') {
-            break;
-        }
-        tab = j.rAttack(tab);
-        j.rLife(tab);
+    j.left(game.getGrid());
+    while (42)
+    {
+        game.input(j);
         if (j.death() == 1)
-        	break;
-		display(tab, x, y);
-		refresh();
+            break;
+        game.render();
     }
 }
 
 int main(void)
 {
-	int x;
-	int y;
-
-	x = 20;
-	y = 100;
-	char **tab = new char*[y];
-	for (int i=0; i < y; i++)
-		tab[i] = new char[x];
-	init();
-	init_tab(tab, x, y);
-	game_loop(tab, x, y);
-	endwin();
-	for (int i=0; i < y; i++)
-    	delete[] tab[i];
-  	delete[] tab;
-	return 0;
+    init();
+    game_loop();
+    endwin();
+    return 0;
 }
 
