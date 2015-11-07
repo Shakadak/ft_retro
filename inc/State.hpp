@@ -9,6 +9,8 @@ class State {
         ~State(void);
         State&  operator=(State const& rhs);
 
+        void    render(void);
+
     private:
         char**  _grid;
         unsigned int    _xmax;
