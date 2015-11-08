@@ -203,7 +203,7 @@ char** Unit::rAttack(char **tab)
 char** Unit::rEnnemy(char **tab)
 {
 	int i = 0;
-	if (this->_y <= 1 || tab[this->_y + 1][this->_x] == '-')
+	if (this->_y <= 0 || tab[this->_y + 1][this->_x] == '-')
 	{
 		tab[this->_y][this->_x] = ' ';
 		this->_death = 1;
@@ -214,7 +214,7 @@ char** Unit::rEnnemy(char **tab)
 		{
 			tab[this->_att[i][2]][this->_att[i][1]] = ' ';
 			this->_att[i][2]-=2;
-			if (this->_att[i][2] > this->_ymin)
+			if (this->_att[i][2] >= this->_ymin)
 				tab[this->_att[i][2]][this->_att[i][1]] = '-';
 			else
 				this->_att[i][0] = 0;
