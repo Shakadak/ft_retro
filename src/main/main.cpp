@@ -6,7 +6,7 @@
 /*   By: dle-norm <dle-norm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 13:20:41 by dle-norm          #+#    #+#             */
-/*   Updated: 2015/11/08 11:40:39 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/08 13:02:39 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <iostream>
 #include <sys/time.h>
 #include "Unit.hpp"
+#include "UnitNode.hpp"
 #include "State.hpp"
 
 static void init(void) {

@@ -8,12 +8,14 @@ DIRINC	:=	inc
 
 DIRMAIN		:=	$(DIRSRC)/main
 DIRSTATE	:=	$(DIRSRC)/state
+DIRENT	:=	$(DIRSRC)/entities
 DIRUTIL	:=	$(DIRSRC)/util
 
 ### FILES ###
 
 include $(DIRMAIN)/sources.mk
 include $(DIRSTATE)/sources.mk
+include $(DIRENT)/sources.mk
 include $(DIRUTIL)/sources.mk
 
 POBJ	:=	$(addprefix $(DIROBJ)/, $(OBJ))
