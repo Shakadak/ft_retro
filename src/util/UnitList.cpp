@@ -1,15 +1,14 @@
-#include "UnitNode.hpp"
+#include "UnitList.hpp"
 
-void    UnitNode::iterate(void (*f)(Unit &)) {
+void    UnitList::iterate(void (*f)(Unit &)) {
     f(*_cell);
     if (_next) {
         _next->iterate(f);
     }
 }
 
-void    UnitNode::filter(bool (*p)(Unit const&)) {
-    //UnitNode* prev = _prev;
-    UnitNode* next = _next;
+UnitList&   UnitList::filter(bool (*p)(Unit const&)) {
+    UnitList* next = _next;
     if (!p(*_cell)){
         this->remove();
     }
@@ -21,15 +20,15 @@ void    UnitNode::filter(bool (*p)(Unit const&)) {
     }
 }
 
-UnitNode::UnitNode(void) : _cell(NULL), _next(NULL), _prev(NULL) {
+UnitList::UnitList(void) : _cell(NULL), _next(NULL), _prev(NULL) {
 }
 
-UnitNode::UnitNode(UnitNode const& node) {
+UnitList::UnitList(UnitList const& node) {
     _cell = new Unit(*node._cell);
-    _next = new UnitNode(*node._next);
+    _next = new UnitList(*node._next);
 }
 
-UnitNode::UnitNode(UnitNode* prev, Unit* cell)
+UnitList::UnitList(UnitList* prev, Unit* cell)
     : _cell(cell), _next(prev->_next), _prev(prev) {
         if (prev->_next){
             prev->_next->_prev = this;
@@ -37,7 +36,7 @@ UnitNode::UnitNode(UnitNode* prev, Unit* cell)
         }
 }
 
-UnitNode::UnitNode(Unit* cell, UnitNode* next)
+UnitList::UnitList(Unit* cell, UnitList* next)
     : _cell(cell), _next(next), _prev(next->_prev) {
         if (next->_prev) {
             next->_prev->_next = this;
@@ -45,10 +44,10 @@ UnitNode::UnitNode(Unit* cell, UnitNode* next)
         }
 }
 
-UnitNode::UnitNode(Unit* cell) : _cell(cell), _next(NULL), _prev(NULL) {
+UnitList::UnitList(Unit* cell) : _cell(cell), _next(NULL), _prev(NULL) {
 }
 
-UnitNode::~UnitNode(void) {
+UnitList::~UnitList(void) {
     delete _cell;
     _cell = NULL;
     delete _prev;
@@ -57,13 +56,13 @@ UnitNode::~UnitNode(void) {
     _next = NULL;
 }
 
-UnitNode&   UnitNode::operator=(UnitNode const& node) {
+UnitList&   UnitList::operator=(UnitList const& node) {
     _cell = node._cell;
     _next = node._next;
     return (*this);
 }
 
-void        UnitNode::remove(void) {
+void        UnitList::remove(void) {
     if (_next) {
         _next->_prev = _prev;
     }
@@ -75,12 +74,12 @@ void        UnitNode::remove(void) {
     delete this;
 }
 
-void        UnitNode::add(Unit* cell) {
+void        UnitList::add(Unit* cell) {
     if (_cell == NULL) {
         _cell = cell;
     }
     else if (_next == NULL) {
-        new UnitNode(this, cell);
+        new UnitList(this, cell);
     }
     else {
         _next->add(cell);
