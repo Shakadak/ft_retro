@@ -203,7 +203,7 @@ char** Unit::rAttack(char **tab)
 char** Unit::rEnnemy(char **tab)
 {
 	int i = 0;
-	if (this->_y <= 1)
+	if (this->_y <= 1 || tab[this->_y + 1][this->_x] == '-')
 	{
 		tab[this->_y][this->_x] = ' ';
 		this->_death = 1;
@@ -241,7 +241,7 @@ void Unit::rLife(char **tab)
 			{
 				if (i > 2)
 				{
-					if (tab[i - 2][j - 1] != '-' && tab[i - 2][j - 2] != '-')
+					if (tab[i - 1][j] != '-' || tab[i - 2][j] != '-')
 						return;
 					else
 						;
