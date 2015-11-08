@@ -6,6 +6,7 @@
 
 class UnitList {
     public:
+        bool    any(bool (*p)(Unit const&));
         void    iterate(void (*f)(Unit &));
         UnitList*   filter(bool (*p)(Unit const&));
 

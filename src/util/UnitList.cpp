@@ -1,5 +1,17 @@
 #include "UnitList.hpp"
 
+bool    UnitList::any(bool (*p)(Unit const&)) {
+    if (p(*_cell)) {
+        return (true);
+    }
+    else if (_next) {
+        return (_next->any(p));
+    }
+    else {
+        return (true);
+    }
+}
+
 void    UnitList::iterate(void (*f)(Unit &)) {
     f(*_cell);
     if (_next) {
@@ -10,9 +22,9 @@ void    UnitList::iterate(void (*f)(Unit &)) {
 UnitList*   UnitList::filter(bool (*p)(Unit const&)) {
     if (p(*_cell)) {
         if (_next) {
-            _next = _next->filter(p);
+            return (new UnitList(new Unit(*_cell), _next->filter(p)));
         }
-        return (this);
+        return (new UnitList(new Unit(*_cell)));
     }
     else if (this->remove()) {
             return (_next->filter(p));
