@@ -40,7 +40,6 @@ static void game_loop(void)
     Unit j(10, 10, '>');
     Unit *e = new Unit[10];
     int i = 0;
-    int k;
     int nbA;
     long long interval = 100;
     long long t0, t1;
@@ -74,12 +73,17 @@ static void game_loop(void)
                 nbA = rand() % 29;
                 e[i] = Unit(nbA, 99);
             }
-            k = rand() % 50;
-            if (k == 2)
+            nbA = rand() % 50;
+            if (nbA == 2)
             {
                 e[i].eAttack();
             }
             e[i].left(game.getGrid());
+            nbA = rand() % 35;
+            if (nbA == 2)
+                e[i].down(game.getGrid());
+            else if (nbA == 1)
+                e[i].up(game.getGrid());
             i++;
         }
         j.rLife(game.getGrid());

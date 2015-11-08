@@ -24,7 +24,7 @@ Unit::Unit()
 	for (int i = 0; i < this->_attmax; i++)
 		this->_att[i] = new int[3];
 	for (int i=0; i < this->_attmax; i++)
-    	for (int j=0; j < 3; j++)
+ 		for (int j=0; j < 3; j++)
       		this->_att[i][j] = 0;
     this->_death = 0;
 }
@@ -35,7 +35,7 @@ Unit::Unit(int x, int y) : _x(x), _y(y), _type(getType())
 	for (int i = 0; i < this->_attmax; i++)
 		this->_att[i] = new int[3];
 	for (int i=0; i < this->_attmax; i++)
-    	for (int j=0; j < 3; j++)
+ 		for (int j=0; j < 3; j++)
       		this->_att[i][j] = 0;
     this->_death = 0;
 }
