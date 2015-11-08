@@ -15,6 +15,8 @@ void    Player::activateAttack(void) {
 }
 
 Player::Player(void) {
+    _x = 10;
+    _y = 10;
     _type = '>';
 }
 

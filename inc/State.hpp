@@ -1,7 +1,7 @@
 #ifndef STATE_HPP
 # define STATE_HPP
 
-#include "Unit.hpp"
+#include "Player.hpp"
 #include <iostream>
 
 class State {
@@ -13,7 +13,7 @@ class State {
         State&  operator=(State const& rhs);
 
         void    score(int score, int life, int missile);
-        void    input(Unit& player);
+        void    input(Player& player);
         void    render(void);
         char**  getGrid(void);
         char**  clearGrid(void);

@@ -6,18 +6,18 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 15:16:53 by npineau           #+#    #+#             */
-/*   Updated: 2015/11/07 21:14:45 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/08 19:18:34 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cstdlib>
 #include <ncurses.h>
 #include "State.hpp"
-#include "Unit.hpp"
+#include "Player.hpp"
 #include <string>
 
 /*void State::display(Unit const& unit) {
-}*/
+  }*/
 
 void State::setMissile(int nb)
 {
@@ -90,7 +90,7 @@ void State::score(int score, int life, int missile)
     }
 }
 
-void State::input(Unit& player) {
+void State::input(Player& player) {
     int ch;
     int buff = getch();
     do {
@@ -105,21 +105,20 @@ void State::input(Unit& player) {
             std::exit(EXIT_SUCCESS);
             break;
         case KEY_LEFT:
-            player.left(_grid);
+            player.setDir(Player::Left);
             break;
         case KEY_RIGHT:
-            player.right(_grid);
+            player.setDir(Player::Right);
             break;
         case KEY_UP:
-            player.up(_grid);
+            player.setDir(Player::Up);
             break;
         case KEY_DOWN:
-            player.down(_grid);
+            player.setDir(Player::Down);
             break;
         case ' ':
-        {
-            player.attack();
-        }
+            player.activateAttack();
+            break;
     }
     player.rAttack(_grid);
     player.rLife(_grid);
