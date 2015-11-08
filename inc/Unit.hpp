@@ -6,7 +6,7 @@
 /*   By: dle-norm <dle-norm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 13:35:27 by dle-norm          #+#    #+#             */
-/*   Updated: 2015/11/08 19:48:49 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/08 19:57:31 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,18 @@ class Unit
         char    getC(void)const;
     protected:
         Direction _dir;
-        int _x;
-        int _y;
-        bool    _atk;
-        int **_att;
-        int _death;
-        static int _attmax;
-        static int _xmin;
-        static int _ymin;
-        static int _xmax;
-        static int _ymax;
-        char _type;
+        int         _speed;
+        int         _x;
+        int         _y;
+        bool        _atk;
+        int**       _att;
+        int         _death;
+        char        _type;
+        static int  _attmax;
+        static int  _xmin;
+        static int  _ymin;
+        static int  _xmax;
+        static int  _ymax;
 };
 
 #endif
