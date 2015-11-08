@@ -6,7 +6,7 @@
 /*   By: dle-norm <dle-norm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 13:35:15 by dle-norm          #+#    #+#             */
-/*   Updated: 2015/11/08 19:35:57 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/08 19:48:21 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool    Unit::getAtk(void) {
     return (atk);
 }
 
-Unit::Unit() : _atk(false), _dir(Unit::None) {
+Unit::Unit() : _dir(Unit::None), _atk(false) {
     this->_att = new int*[this->_attmax];
     for (int i = 0; i < this->_attmax; i++)
         this->_att[i] = new int[3];

@@ -6,7 +6,7 @@
 /*   By: dle-norm <dle-norm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 13:35:27 by dle-norm          #+#    #+#             */
-/*   Updated: 2015/11/08 19:37:15 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/08 19:48:49 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class Unit
         Unit(int x, int y, char c);
         Unit(int x, int y);
         Unit( Unit const & str);
-        ~Unit();
+        virtual ~Unit();
 
         Unit & operator=(Unit const & rhs);
         char** right(char **tab);
