@@ -6,7 +6,7 @@
 /*   By: dle-norm <dle-norm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 13:20:41 by dle-norm          #+#    #+#             */
-/*   Updated: 2015/11/08 13:02:39 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/08 19:33:19 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <iostream>
 #include <sys/time.h>
 #include "Unit.hpp"
-#include "UnitNode.hpp"
+#include "UnitList.hpp"
 #include "State.hpp"
 
 static void init(void) {
@@ -24,7 +24,6 @@ static void init(void) {
     cbreak();
     keypad(stdscr, TRUE);
     nodelay(stdscr, TRUE);
-    //halfdelay(1);
     curs_set(0);
 }
 
@@ -37,7 +36,7 @@ static long long getTime() {
 static void game_loop(void)
 {
     State game(20, 100);
-    Unit j(10, 10, '>');
+    Player j;
     Unit *e = new Unit[10];
     int i = 0;
     int nbA;
