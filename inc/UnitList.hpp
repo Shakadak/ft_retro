@@ -7,17 +7,17 @@
 class UnitList {
     public:
         void    iterate(void (*f)(Unit &));
-        void    filter(bool (*p)(Unit const&));
+        UnitList*   filter(bool (*p)(Unit const&));
 
         UnitList(void);
         UnitList(UnitList const& node);
-        UnitList(UnitList* node, Unit* cell);
+        UnitList(Unit* cell, UnitList* node);
         UnitList(Unit* cell);
         ~UnitList(void);
         UnitList&   operator=(UnitList const& node);
 
         void        add(Unit* cell);
-        void        remove(void);
+        UnitList*   remove(void);
 
     private:
         Unit*       _cell;
