@@ -41,7 +41,7 @@ static void game_loop(void)
     Unit *e = new Unit[10];
     int i = 0;
     int nbA;
-    long long interval = 100;
+    long long interval = 50;
     long long t0, t1;
 
     t0 = getTime();

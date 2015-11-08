@@ -238,7 +238,17 @@ void Unit::rLife(char **tab)
 		while(j != this->_xmax)
 		{
 			if (tab[i][j] == '>')
-				return;
+			{
+				if (i > 2)
+				{
+					if (tab[i - 2][j - 1] != '-' && tab[i - 2][j - 2] != '-')
+						return;
+					else
+						;
+				}
+				else
+					return;
+			}
 			j++;
 		}
 		i++;
