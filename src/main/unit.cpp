@@ -6,14 +6,14 @@
 /*   By: dle-norm <dle-norm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 13:35:15 by dle-norm          #+#    #+#             */
-/*   Updated: 2015/11/07 21:07:17 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/08 11:40:54 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cstdlib>
-#include "unit.hpp"
+#include "Unit.hpp"
 
-char getType(void) {
+static char getType(void) {
     char types[9] = {'<', 'I', 'K', 'O', '0', '*', '$', '#', '@'};
     return (types[rand() % 9]);
 }

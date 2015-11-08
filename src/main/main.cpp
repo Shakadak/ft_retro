@@ -6,17 +6,17 @@
 /*   By: dle-norm <dle-norm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 13:20:41 by dle-norm          #+#    #+#             */
-/*   Updated: 2015/11/07 21:11:11 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/08 11:40:39 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ncurses.h>
 #include <iostream>
 #include <sys/time.h>
-#include "unit.hpp"
+#include "Unit.hpp"
 #include "State.hpp"
 
-void init(void) {
+static void init(void) {
     initscr();
     clear();
     noecho();
@@ -27,13 +27,13 @@ void init(void) {
     curs_set(0);
 }
 
-long long getTime() {
+static long long getTime() {
     timeval tv;
     gettimeofday(&tv, NULL);
     return ((long long)tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-void game_loop(void)
+static void game_loop(void)
 {
     State game(20, 100);
     Unit j(10, 10, '>');
