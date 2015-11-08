@@ -249,7 +249,7 @@ char** Unit::rEnnemy(char **tab)
 			{
 				if (i > 2)
 				{
-					if (tab[i - 1][j] != '-' || tab[i - 2][j] != '-')
+					if (tab[i + 1][j] != '-')
 						;
 					else
 						this->_death = 1;
