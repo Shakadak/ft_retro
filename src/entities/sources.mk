@@ -1,4 +1,4 @@
-ENT := Unit.cpp
+ENT := Unit.cpp Player.cpp
 
 OBJ := $(OBJ) $(ENT:.cpp=.o)
 
