@@ -70,6 +70,7 @@ static void game_loop(void)
         {
             if (e[i].death() == 1)
             {
+                e[i].rEnnemy(game.getGrid());
                 nbA = rand() % 29;
                 e[i] = Unit(nbA, 99);
             }

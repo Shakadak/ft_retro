@@ -210,7 +210,7 @@ char** Unit::rEnnemy(char **tab)
 	}
 	while (i < this->_attmax)
 	{
-		if (this->_att[i][0] == 1)
+		if (this->_att[i][0] == 1 && this->_death == 0)
 		{
 			tab[this->_att[i][2]][this->_att[i][1]] = ' ';
 			this->_att[i][2]-=2;
@@ -219,6 +219,8 @@ char** Unit::rEnnemy(char **tab)
 			else
 				this->_att[i][0] = 0;
 		}
+		else if (this->_death == 1 && this->_att[i][0] == 1)
+			tab[this->_att[i][2]][this->_att[i][1]] = ' ';
 		i++;
 	}
 	return tab;
