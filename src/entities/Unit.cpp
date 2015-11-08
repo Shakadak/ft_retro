@@ -237,6 +237,30 @@ char** Unit::rEnnemy(char **tab)
 			tab[this->_att[i][2]][this->_att[i][1]] = ' ';
 		i++;
 	}
+	int j;
+
+	i = 0;
+	while(i != this->_ymax)
+	{
+		j = 0;
+		while(j != this->_xmax)
+		{
+			if (tab[i][j] == this->_type)
+			{
+				if (i > 2)
+				{
+					if (tab[i - 1][j] != '-' || tab[i - 2][j] != '-')
+						;
+					else
+						this->_death = 1;
+				}
+				else
+					;
+			}
+			j++;
+		}
+		i++;
+	}
 	return tab;
 }
 
