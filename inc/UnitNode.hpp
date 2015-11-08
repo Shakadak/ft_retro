@@ -6,6 +6,9 @@
 
 class UnitNode {
     public:
+        void    iterate(void (*f)(Unit &));
+        void    filter(bool (*p)(Unit const&));
+
         UnitNode(void);
         UnitNode(UnitNode const& node);
         UnitNode(Unit* cell, UnitNode* node);
@@ -13,7 +16,9 @@ class UnitNode {
         UnitNode(Unit* cell);
         ~UnitNode(void);
         UnitNode&   operator=(UnitNode const& node);
+
         void        add(Unit* cell);
+        void        remove(void);
 
     private:
         Unit*       _cell;
