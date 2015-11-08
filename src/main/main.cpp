@@ -69,6 +69,7 @@ static void game_loop(void)
         {
             if (e[i].death() == 1)
             {
+                game.setScore();
                 e[i].rEnnemy(game.getGrid());
                 nbA = rand() % 29;
                 e[i] = Unit(nbA, 99);
@@ -95,6 +96,12 @@ static void game_loop(void)
             i++;
         }
         if (j.death() == 1)
+        {
+            j.setDeath();
+            game.setLife();
+        }
+        game.setMissile(j.getMiss());
+        if (game.getLife() < 0)
             break;
         game.render();
     }

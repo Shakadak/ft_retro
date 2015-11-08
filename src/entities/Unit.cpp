@@ -73,9 +73,23 @@ Unit & Unit::operator=(Unit const & rhs)
 	return (*this);
 }
 
-int** Unit::getAtt(void) const 
+int Unit::getMiss(void)
 {
-	return(this->_att);
+	int i = 0;
+	int nb;
+	nb = _attmax - 1;
+	while (i < _attmax)
+	{
+		if (this->_att[i][0] == 1)
+			nb = nb - 1;
+		i++;
+	}
+	return(nb);
+}
+
+int **Unit::getAtt(void) const
+{
+	return (this->_att);
 }
 
 int Unit::death(void) const
@@ -254,6 +268,11 @@ void Unit::rLife(char **tab)
 		i++;
 	}
 	this->_death = 1;
+}
+
+void Unit::setDeath(void)
+{
+	this->_death = 0;
 }
 
 int Unit::_xmax = 20;

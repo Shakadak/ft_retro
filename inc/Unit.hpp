@@ -33,7 +33,9 @@ class Unit
  	char** rAttack(char **tab);
  	char** rEnnemy(char **tab);
  	
+ 	void setDeath(void);
  	int **getAtt(void)const;
+ 	int getMiss(void);
  	int death(void)const;
  	int getX(void)const;
  	int getY(void)const;

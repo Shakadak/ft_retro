@@ -14,9 +14,81 @@
 #include <ncurses.h>
 #include "State.hpp"
 #include "Unit.hpp"
+#include <string>
 
 /*void State::display(Unit const& unit) {
 }*/
+
+void State::setMissile(int nb)
+{
+    _missile = nb;
+}
+
+int State::getLife(void)
+{
+    return (_life);
+}
+
+void State::setLife(void)
+{
+    _life--;
+}
+
+void State::setScore(void)
+{
+    _score += 50;
+}
+
+void State::score(int score, int life, int missile)
+{
+    unsigned long i;
+    unsigned long j;
+
+    i = 10;
+    j = 0;
+    std::string mot = "SCORE : ";
+    while (j < mot.size())
+    {
+        mvaddch(_xmax + 1, i++, mot[j]);
+        j++;
+    }
+    mot = std::to_string(score);
+    j = 0;
+    while (j < mot.size())
+    {
+        mvaddch(_xmax + 1, i++, mot[j]);
+        j++;
+    }
+    i += 5;
+    j = 0;
+    mot = "SHIELD : ";
+    while (j < mot.size())
+    {
+        mvaddch(_xmax + 1, i++, mot[j]);
+        j++;
+    }
+    mot = std::to_string(life);
+    j = 0;
+    while (j < mot.size())
+    {
+        mvaddch(_xmax + 1, i++, mot[j]);
+        j++;
+    }
+    j = 0;
+    mot = "    MISSILE : ";
+    while (j < mot.size())
+    {
+        mvaddch(_xmax + 1, i++, mot[j]);
+        j++;
+    }
+    mot = std::to_string(missile);
+    j = 0;
+    while (j < mot.size())
+    {
+        mvaddch(_xmax + 1, i++, mot[j]);
+        j++;
+    }
+}
 
 void State::input(Unit& player) {
     int ch;
@@ -45,7 +117,9 @@ void State::input(Unit& player) {
             player.down(_grid);
             break;
         case ' ':
+        {
             player.attack();
+        }
     }
     player.rAttack(_grid);
     player.rLife(_grid);
@@ -57,6 +131,7 @@ void State::render(void) {
             mvaddch(j, i, _grid[i][j]);
         }
     }
+    this->score(this->_score, this->_life, this->_missile);
     refresh();
 }
 
@@ -110,3 +185,8 @@ State&  State::operator=(State const& rhs) {
     _grid = rhs._grid;
     return (*this);
 }
+
+int State::_life = 20;
+int State::_missile = 5;
+int State::_score = 0;
+
