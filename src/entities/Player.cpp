@@ -15,6 +15,7 @@ void    Player::activateAttack(void) {
 }
 
 Player::Player(void) {
+    _type = '>';
 }
 
 Player::Player(Player const & src) {

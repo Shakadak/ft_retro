@@ -14,6 +14,7 @@ class Player : public Unit {
         virtual ~Player(void);
 
         Player const &operator=(Player const & rhs);
+
 };
 
 #endif
