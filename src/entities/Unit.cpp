@@ -6,7 +6,7 @@
 /*   By: dle-norm <dle-norm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 13:35:15 by dle-norm          #+#    #+#             */
-/*   Updated: 2015/11/08 19:20:54 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/08 19:35:57 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ bool    Unit::getAtk(void) {
     return (atk);
 }
 
-Unit::Unit() : _atk(false)
-{
+Unit::Unit() : _atk(false), _dir(Unit::None) {
     this->_att = new int*[this->_attmax];
     for (int i = 0; i < this->_attmax; i++)
         this->_att[i] = new int[3];
@@ -66,11 +65,7 @@ Unit::Unit(Unit const & str)
     *this = str;
 }
 
-Unit::~Unit()
-{
-    // for (int i=0; i < this->_attmax; i++)
-    //    	delete[] this->_att[i];
-    //  	delete[] this->_att;
+Unit::~Unit() {
 }
 
 Unit & Unit::operator=(Unit const & rhs)

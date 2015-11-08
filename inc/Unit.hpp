@@ -6,7 +6,7 @@
 /*   By: dle-norm <dle-norm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/07 13:35:27 by dle-norm          #+#    #+#             */
-/*   Updated: 2015/11/08 19:00:21 by npineau          ###   ########.fr       */
+/*   Updated: 2015/11/08 19:37:15 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ class Unit
         char** rEnnemy(char **tab);
 
         Direction   getDir(void);
-        bool    getAtk(void);
+        virtual bool    getAtk(void);
         void    setDeath(void);
         int     **getAtt(void)const;
         int     getMiss(void);
